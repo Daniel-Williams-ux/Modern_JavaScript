@@ -101,3 +101,27 @@ console.log(word.toUpperCase()); // "HELLO"
 // Key Idea
 //JavaScript is smart—it makes a toolbox when you need it, but keeps things simple the rest of the time!
 
+
+//The “object wrappers” are different for each primitive type and are called: String, Number, Boolean, Symbol and BigInt. Thus, they provide different sets of methods.
+
+
+// **JavaScript Is Super Smart**
+// When you use a method (like .toFixed() on a number), JavaScript:
+
+// Pretends to quickly make a toolbox (an object) so you can use the method.
+// But because JavaScript is so smart, it may not actually make the toolbox—it just acts like it did to save time.
+// This keeps everything fast but still works the way it’s supposed to.
+
+//Example:
+.toFixed()
+//Let’s say you have a number:
+
+let n = 1.23456;
+console.log(n.toFixed(2)); // Outputs: "1.23"
+//What happens:
+
+// n is just a number.
+// When you call .toFixed(2), JavaScript behaves like it made a temporary toolbox (a Number object) for n.
+// The .toFixed(2) tool rounds n to 2 decimal places and gives you "1.23".
+// The toolbox disappears after the job is done.
+
