@@ -125,3 +125,121 @@ console.log(n.toFixed(2)); // Outputs: "1.23"
 // The .toFixed(2) tool rounds n to 2 decimal places and gives you "1.23".
 // The toolbox disappears after the job is done.
 
+
+
+
+
+
+
+                                                                              //Tasks
+// Can I add a string property?
+// Consider the following code:
+
+let str = "Hello";
+
+str.test = 5;
+
+alert(str.test);
+//What do you think, will it work? What will be shown?
+
+                                                                            // solution
+// Try running it:
+
+let str = "Hello";
+
+str.test = 5; // (*)
+
+alert(str.test);
+//Depending on whether you have use strict or not, the result may be:
+
+// undefined (no strict mode)
+// An error (strict mode).
+// Why? Let’s replay what’s happening at line (*):
+
+
+                                                                      //What Actually Happens
+// When you try to add test to str, JavaScript creates a temporary toolbox (a wrapper object) for the string "Hello".
+// If you’re in strict mode, JavaScript doesn’t allow you to add properties to this temporary toolbox and throws an error.
+// If you’re not in strict mode, JavaScript tries to add the property to the toolbox. But the toolbox disappears immediately after, so the property is lost.
+// Results
+// Depending on the mode:
+
+// In strict mode: You get an error because primitives can’t have permanent properties.
+// Without strict mode: alert(str.test) shows undefined because the toolbox is gone.
+// Why Can’t Primitives Store Data?
+// This happens because primitives are not objects:
+
+// They’re just simple values like numbers or strings.
+// While a temporary toolbox (object) can be created to use methods, it’s destroyed right away.
+// That means you can’t add or store new properties in a primitive.
+// Key Idea
+// Primitives (like strings) are not objects, so:
+
+// You can’t add custom properties to them.
+// If you try, it might look like it worked, but the property will disappear!
+
+// How Primitives Work with Random Properties vs. Built-In Properties/Methods
+// 1. Primitives Are Not Objects
+// Primitives (like strings, numbers, booleans) are simple values, not objects. However:
+
+// JavaScript allows you to use methods on primitives as if they were objects.
+// This is done by creating a temporary wrapper object behind the scenes.
+// 2. Built-In Properties/Methods
+// Primitives have built-in properties and methods provided by their temporary wrapper objects. For example:
+
+// String Primitive Built-In Methods:
+// "hello".toUpperCase() creates a temporary String object and calls its .toUpperCase() method to return "HELLO".
+// "hello".length creates a temporary object to access the length property, which returns 5.
+// Example:
+
+let str = "Hello";
+
+console.log(str.toUpperCase()); // "HELLO"
+console.log(str.length); // 5
+// How It Works:
+
+// JavaScript creates a temporary String object for "Hello".
+// The .toUpperCase() method or .length property is accessed.
+// The temporary object disappears after the operation.
+// 3. Random Properties
+// If you try to add a random property (like .test) to a primitive, JavaScript behaves differently:
+
+// What Happens:
+
+// A temporary wrapper object is created when you access the primitive.
+// The random property (like str.test) is added to the temporary object, not the primitive itself.
+// The temporary object is immediately destroyed after use, so the property vanishes.
+// Example:
+
+let str = "Hello";
+
+str.test = 5; // Adding a random property to the temporary object
+console.log(str.test); // undefined
+
+// Explanation:
+
+// JavaScript creates a temporary String object for "Hello" when str.test is accessed.
+// The property test = 5 is added to the temporary object.
+// The temporary object is destroyed, so str itself never actually stores test.
+    
+//  *Key Differences*
+// Feature      	              Built-In Properties/Methods	                        Random Properties
+// What It Is	                Predefined by JavaScript (e.g., .length)	        User-defined, made up by the developer
+// Where It Lives	            Inside the temporary wrapper object	                Temporarily added to the wrapper object
+// Persistence	                Always available	                                Disappears immediately
+// Example	                    "abc".length → 3	                                str.test = 5; → undefined
+
+//     *Special Notes on Primitives*
+// Primitives Are Immutable: You cannot change or add properties to them directly. Temporary wrapper objects don’t modify the original value.
+// Error in Strict Mode: In strict mode, trying to set random properties (like str.test = 5) will throw an error because primitives don’t actually support adding properties.
+// Example with Strict Mode:
+
+"use strict";
+
+let str = "Hello";
+str.test = 5; // Throws an error
+
+// Summary
+// Built-In Properties/Methods work because JavaScript uses temporary wrapper objects for primitives.
+// Random Properties don’t work because these wrapper objects are temporary and disappear immediately.
+// Primitives are lightweight and immutable, so they only allow access to predefined methods and properties, not custom ones.
