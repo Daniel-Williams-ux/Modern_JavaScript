@@ -79,3 +79,33 @@ let mcs = 1e-6; // five zeroes to the left from 1
 // -1.1	       -2	       -1	          -1	     -1
 // -1.5	       -2	       -1	          -1	     -1
 // -1.6	       -2	       -1	          -2	     -1
+
+
+
+// These functions cover all of the possible ways to deal with the decimal part of a number. But what if we’d like to round the number to n-th digit after the decimal?
+// For instance, we have 1.2345 and want to round it to 2 digits, getting only 1.23.
+// There are two ways to do so:
+
+// 1. Multiply-and-divide.
+
+// For example, to round the number to the 2nd digit after the decimal, we can multiply the number by 100, call the rounding function and then divide it back.
+
+let num = 1.23456;
+
+alert( Math.round(num * 100) / 100 ); // 1.23456 -> 123.456 -> 123 -> 1.23
+
+//2. The method toFixed(n) rounds the number to n digits after the point and returns a string representation of the result.
+
+let num = 12.34;
+alert( num.toFixed(1) ); // "12.3"
+//This rounds up or down to the nearest value, similar to Math.round:
+
+let num = 12.36;
+alert( num.toFixed(1) ); // "12.4"
+//Please note that the result of toFixed is a string. If the decimal part is shorter than required, zeroes are appended to the end:
+
+let num = 12.34;
+alert( num.toFixed(5) ); // "12.34000", added zeroes to make exactly 5 digits
+
+//We can convert it to a number using the unary plus or a Number() call, e.g. write 
++num.toFixed(5).
